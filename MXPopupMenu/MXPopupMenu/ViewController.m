@@ -22,22 +22,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 创建一个圆形path
-    UIBezierPath *circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.view.center.x, self.view.center.y - 25)
-                                                              radius:50
-                                                          startAngle:0
-                                                            endAngle:2 * M_PI
-                                                           clockwise:NO];
+
+    UIView *centerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+    centerView.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:centerView];
     
-    [circlePath closePath];
-    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-    shapeLayer.path = circlePath.CGPath;
-    self.view.layer.mask = shapeLayer;
+    // 创建一个圆形path
+         UIBezierPath *circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(50, 0)
+                                                                                                     radius:50
+                                                                                                 startAngle:0
+                                                                                                   endAngle:2 * M_PI
+                                                                clockwise:NO];
+    
+         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+         shapeLayer.path = circlePath.CGPath;
+         centerView.layer.mask = shapeLayer;
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeContactAdd];
     button.center = self.view.center;
     [button addTarget:self action:@selector(onPopupClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
+    
+
     
 }
 
